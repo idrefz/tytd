@@ -22,26 +22,25 @@ if pdf_file is not None:
 
     # Render halaman jadi gambar (preview)
     page = pdf_in.load_page(page_number - 1)
-    zoom = 2  # untuk resolusi lebih baik
+    zoom = 2
     mat = fitz.Matrix(zoom, zoom)
     pix = page.get_pixmap(matrix=mat)
     img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
 
     st.image(img, caption=f"Preview halaman {page_number}")
 
-    # Canvas untuk tanda tangan
-    st.write("Gambar tanda tangan dan posisikan dengan drag & drop")
+    # Sekarang aman untuk gunakan `img`
+    canvas_result = st_canvas(
+        fill_color="rgba(0,0,0,0)",
+        stroke_width=3,
+        stroke_color="#000000",
+        background_image=img,
+        height=img.height,
+        width=img.width,
+        drawing_mode="freedraw",
+        key="canvas"
+    )
 
-canvas_result = st_canvas(
-    fill_color="rgba(0,0,0,0)",
-    stroke_width=3,
-    stroke_color="#000000",
-    background_image=img,
-    height=img.height,
-    width=img.width,
-    drawing_mode="freedraw",
-    key="canvas"
-)
 
 if canvas_result.image_data is not None:
 

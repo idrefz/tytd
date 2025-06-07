@@ -17,8 +17,10 @@ signature_tab1, signature_tab2 = st.tabs(["✏️ Gambar Tanda Tangan", "📤 Up
 signature_image = None
 
 with signature_tab1:
-canvas_result = st_canvas(
-    fill_color="rgba(0, 0, 0, 0)",
+    canvas_result = st_canvas(
+        fill_color="rgba(0, 0, 0, 0)",
+        ...
+    )
     stroke_width=0,
     stroke_color="#000000",
     background_image=np.array(img),

@@ -32,18 +32,17 @@ if pdf_file is not None:
     # Canvas untuk tanda tangan
     st.write("Gambar tanda tangan dan posisikan dengan drag & drop")
 
-    canvas_result = st_canvas(
-        fill_color="rgba(0,0,0,0)",  # transparan
-        stroke_width=3,
-        stroke_color="#000000",
-        background_image=img,
-        height=img.height,
-        width=img.width,
-        drawing_mode="freedraw",
-        key="canvas",
-        stroke_line_join="round",
-        stroke_line_cap="round",
-    )
+canvas_result = st_canvas(
+    fill_color="rgba(0,0,0,0)",  # transparan
+    stroke_width=3,
+    stroke_color="#000000",
+    background_image=img,
+    height=img.height,
+    width=img.width,
+    drawing_mode="freedraw",
+    key="canvas"
+)
+
 
     if canvas_result.image_data is not None:
         # Simpan tanda tangan sebagai image hitam putih (tanpa background)

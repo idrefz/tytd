@@ -4,6 +4,7 @@ from PIL import Image
 import fitz  # PyMuPDF
 import io
 import tempfile
+import numpy as np
 
 st.set_page_config(page_title="Tanda Tangan Digital - Drag & Drop", layout="wide")
 st.title("✍️ Aplikasi Tanda Tangan Digital - Versi Drag & Drop")
@@ -16,16 +17,17 @@ signature_tab1, signature_tab2 = st.tabs(["✏️ Gambar Tanda Tangan", "📤 Up
 signature_image = None
 
 with signature_tab1:
-    canvas_result = st_canvas(
-        fill_color="rgba(0, 0, 0, 0)",
-        stroke_width=3,
-        stroke_color="#000000",
-        background_color="#ffffff",
-        height=150,
-        width=400,
-        drawing_mode="freedraw",
-        key="signature_canvas",
-    )
+canvas_result = st_canvas(
+    fill_color="rgba(0, 0, 0, 0)",
+    stroke_width=0,
+    stroke_color="#000000",
+    background_image=np.array(img),
+    update_streamlit=True,
+    height=img.height,
+    width=img.width,
+    drawing_mode="transform",
+    key="position_canvas",
+)
     if canvas_result.image_data is not None:
         signature_image = Image.fromarray((canvas_result.image_data).astype("uint8"))
 
